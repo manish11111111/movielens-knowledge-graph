@@ -2,6 +2,7 @@
 
 A graph-based movie recommendation and data exploration application built with **Python, Neo4j Aura, Cypher, Streamlit, and PyVis**.
 
+**Live Demo:** [Try the MovieLens Knowledge Graph](https://movielens-knowledge-graph.streamlit.app/)  
 **GitHub Repository:** [movielens-knowledge-graph](https://github.com/manish11111111/movielens-knowledge-graph)
 
 ## About the Project
@@ -50,7 +51,7 @@ They are connected through these relationships:
 (Movie)-[:IN_GENRE]->(Genre)
 ```
 
-This model supports queries across movie genres, user ratings, and tags, making it possible to explore connections that are useful for recommendation and analytics tasks.
+This model supports queries across movie genres, user ratings, and tags, making it possible to explore connections useful for recommendation and analytics tasks.
 
 ## Dataset
 
@@ -88,13 +89,12 @@ MovieLens-Knowledge-Graph/
 │   ├── import_ratings.py
 │   └── import_tags.py
 ├── app.py
-├── .env
 ├── .gitignore
 ├── requirements.txt
 └── README.md
 ```
 
-*Note: The structure above highlights the main project files. Keep it aligned with the actual files and folders in your repository.*
+*Note: This tree represents the main project files. Keep it aligned with the actual files and folders in the repository. The `.env` file is intentionally excluded because it contains private credentials.*
 
 ## Getting Started
 
@@ -107,7 +107,7 @@ cd movielens-knowledge-graph
 
 ### 2. Create a virtual environment
 
-On Windows:
+On Windows, using Python 3.14:
 
 ```powershell
 py -3.14 -m venv .venv
@@ -155,6 +155,15 @@ If the graph has already been imported, you can skip this step unless you need t
 
 Streamlit will provide a local URL in the terminal. Open that URL in your browser to use the application.
 
+## Deployment
+
+The application is available online through Streamlit Community Cloud and connects to a Neo4j Aura database.
+
+- **Live application:** [movielens-knowledge-graph.streamlit.app](https://movielens-knowledge-graph.streamlit.app/)
+- **Source code:** [GitHub repository](https://github.com/manish11111111/movielens-knowledge-graph)
+
+Database credentials for the deployed application are configured through Streamlit Cloud secrets rather than committed to the repository.
+
 ## Example: Graph-Based Recommendations
 
 The project includes Cypher queries demonstrating two baseline recommendation approaches.
@@ -179,6 +188,7 @@ Working on this project gave me practical experience with:
 - Building an interactive dashboard with Streamlit.
 - Visualising relationships between users, movies, and genres using PyVis.
 - Managing configuration through environment variables.
+- Deploying a Python application to Streamlit Community Cloud.
 
 ## Limitations and Next Steps
 
@@ -189,10 +199,9 @@ Potential improvements include:
 - Adding movie posters and richer movie metadata.
 - Adding genre analytics charts and rating distribution visualisations.
 - Improving recommendation scoring and ranking.
-- Evaluating recommendations using metrics such as Precision@K, Recall@K, and F1@K.
+- Evaluating recommendations using metrics such as Precision@K and Recall@K.
 - Adding more interactive graph exploration features.
-- Deploying the application so others can try it online.
 
 ## Dataset Credit
 
-This project uses the [MovieLens dataset](https://grouplens.org/datasets/movielens/) provided by [GroupLens](https://grouplens.org/). Please refer to the original dataset page for its details and terms of use.
+This project uses the [MovieLens dataset](https://grouplens.org/datasets/movielens/) provided by [GroupLens](https://grouplens.org/). Please refer to the original dataset page for dataset details and terms of use.
