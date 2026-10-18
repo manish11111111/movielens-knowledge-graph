@@ -1,33 +1,38 @@
 # MovieLens Knowledge Graph
 
-A graph-based movie recommendation and data exploration project built with Python and Neo4j.
+A graph-based movie recommendation and data exploration application built with **Python, Neo4j Aura, Cypher, Streamlit, and PyVis**.
 
 **GitHub Repository:** [movielens-knowledge-graph](https://github.com/manish11111111/movielens-knowledge-graph)
 
 ## About the Project
 
-I built this project to explore how graph databases can be used to connect movie data and find relationships that are useful for recommendations.
+I built this project to explore how graph databases can represent relationships between users, movies, genres, ratings, and tags to support movie recommendations and data exploration.
 
-Instead of keeping movies, users, genres, ratings, and tags in separate tables, I modelled them as connected nodes and relationships in Neo4j. This makes it possible to explore movie similarities, user rating patterns, and genre-level trends using Cypher queries.
+Instead of storing everything as disconnected records, I modelled the data as connected nodes and relationships in Neo4j. This allows me to explore movie similarities, user rating patterns, and genre-level trends using Cypher queries.
 
-The project uses the MovieLens dataset and Python scripts to load the data into a Neo4j Aura database.
+The project uses the MovieLens dataset, Python data-import scripts, and a Neo4j Aura database. It also includes a Streamlit web interface for exploring the graph and inspecting movie information interactively.
 
-## What It Can Do
+## Features
 
 - Import movies, genres, ratings, and tags into Neo4j.
+- Explore movies through a Streamlit dashboard.
+- Search for movies and inspect their details.
+- Explore movie relationships through an interactive knowledge graph.
 - Find movies that share genres with a selected movie.
-- Explore recommendations based on users who rated the same movies highly.
-- Analyse movie ratings and genre popularity.
-- Check the graph for missing data and unexpected values.
-- Explore relationships between users, movies, and genres with Cypher.
+- Explore baseline recommendations based on user rating patterns.
+- Analyse movie ratings and genre popularity using Cypher.
+- Run graph overview, relationship analysis, and data quality checks.
 
 ## Tech Stack
 
-- **Python** — data import and processing
-- **Neo4j Aura** — graph database
-- **Cypher** — graph queries and recommendations
+- **Python** — data import, processing, and application logic
+- **Neo4j Aura** — cloud-hosted graph database
+- **Cypher** — graph queries, analytics, and recommendation logic
 - **Pandas** — CSV data handling
+- **Streamlit** — interactive web application and dashboard
+- **PyVis** — interactive graph visualisation
 - **python-dotenv** — environment configuration
+- **certifi** — trusted certificate bundle for secure connections
 
 ## Graph Model
 
@@ -45,11 +50,11 @@ They are connected through these relationships:
 (Movie)-[:IN_GENRE]->(Genre)
 ```
 
-This structure lets me query both movie information and the connections between users and movies.
+This model supports queries across movie genres, user ratings, and tags, making it possible to explore connections that are useful for recommendation and analytics tasks.
 
 ## Dataset
 
-The imported dataset contains:
+The imported graph contains the following nodes and relationships:
 
 | Item | Count |
 |---|---:|
@@ -82,11 +87,14 @@ MovieLens-Knowledge-Graph/
 │   ├── import_movies.py
 │   ├── import_ratings.py
 │   └── import_tags.py
+├── app.py
 ├── .env
 ├── .gitignore
 ├── requirements.txt
 └── README.md
 ```
+
+*Note: The structure above highlights the main project files. Keep it aligned with the actual files and folders in your repository.*
 
 ## Getting Started
 
@@ -105,11 +113,13 @@ On Windows:
 py -3.14 -m venv .venv
 ```
 
-### 3. Install the dependencies
+### 3. Install dependencies
 
 ```powershell
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
+
+Make sure `requirements.txt` includes the dependencies used by the application, including `streamlit`, `pyvis`, `neo4j`, `pandas`, `python-dotenv`, and `certifi`.
 
 ### 4. Configure Neo4j
 
@@ -121,11 +131,13 @@ NEO4J_USERNAME=your_neo4j_username
 NEO4J_PASSWORD=your_neo4j_password
 ```
 
-Keep your credentials private. The `.env` file should not be committed to GitHub.
+Use your own credentials and keep them private. **Never commit your `.env` file to GitHub.**
 
 ### 5. Import the dataset
 
-Run these commands from the project root:
+Make sure the required CSV files are available in the `data/` directory and your Neo4j database is running.
+
+Run the import scripts from the project root:
 
 ```powershell
 .\.venv\Scripts\python.exe .\src\import_movies.py
@@ -133,30 +145,54 @@ Run these commands from the project root:
 .\.venv\Scripts\python.exe .\src\import_tags.py
 ```
 
-Make sure the CSV files are present in the `data/` directory and your Neo4j database is available before running the scripts.
+If the graph has already been imported, you can skip this step unless you need to reload the data.
 
-## Example: Genre-Based Recommendations
+### 6. Launch the Streamlit application
 
-One of the queries uses *Toy Story (1995)* as the target movie and finds other movies that share its genres. It then considers rating counts and average ratings to rank the results.
+```powershell
+.\.venv\Scripts\python.exe -m streamlit run app.py
+```
 
-Another query looks at movies rated highly by users who also rated *Toy Story (1995)* highly. These are baseline recommendation approaches intended to demonstrate how graph relationships can be used for recommendations.
+Streamlit will provide a local URL in the terminal. Open that URL in your browser to use the application.
 
-The `.cypher` files in the `queries/` directory contain the queries for graph inspection, data quality checks, recommendations, and analytics.
+## Example: Graph-Based Recommendations
+
+The project includes Cypher queries demonstrating two baseline recommendation approaches.
+
+**Genre-based recommendations:** Find movies that share genres with a selected movie, then use rating counts and average ratings to help rank the results.
+
+**Collaborative recommendation exploration:** Identify movies rated highly by users who also rated a target movie highly.
+
+For example, `Toy Story (1995)` can be used to explore genre overlap and connections through user ratings.
+
+These approaches demonstrate graph-based recommendation logic; they are not intended to represent a fully trained or comprehensively evaluated recommendation model.
 
 ## What I Learned
 
 Working on this project gave me practical experience with:
 
 - Designing a graph data model.
-- Loading CSV data into Neo4j using Python.
-- Writing Cypher queries to explore connected data.
-- Checking data quality after an import.
-- Building basic recommendation logic from genre overlap and user ratings.
+- Loading and processing CSV data with Python.
+- Connecting Python applications to Neo4j Aura.
+- Writing Cypher queries for analytics and recommendations.
+- Checking data quality after importing data.
+- Building an interactive dashboard with Streamlit.
+- Visualising relationships between users, movies, and genres using PyVis.
+- Managing configuration through environment variables.
 
 ## Limitations and Next Steps
 
-The current recommendations use straightforward rules rather than a trained or evaluated recommendation model. The next improvements could include better scoring, more robust ranking, recommendation evaluation, and a visual interface for exploring the graph.
+The current recommendations use straightforward graph-query rules rather than a trained recommendation model with comprehensive offline evaluation.
+
+Potential improvements include:
+
+- Adding movie posters and richer movie metadata.
+- Adding genre analytics charts and rating distribution visualisations.
+- Improving recommendation scoring and ranking.
+- Evaluating recommendations using metrics such as Precision@K, Recall@K, and F1@K.
+- Adding more interactive graph exploration features.
+- Deploying the application so others can try it online.
 
 ## Dataset Credit
 
-This project uses the [MovieLens dataset](https://grouplens.org/datasets/movielens/) provided by GroupLens. Please refer to the original dataset page for its details and terms.
+This project uses the [MovieLens dataset](https://grouplens.org/datasets/movielens/) provided by [GroupLens](https://grouplens.org/). Please refer to the original dataset page for its details and terms of use.
