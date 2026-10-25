@@ -1014,7 +1014,7 @@ st.markdown("""
 <div class="app-footer">
     <div class="brand">
         <div class="stat-icon red" style="width:28px;height:28px;font-size:0.8rem;margin:0;">🎬</div>
-        <span>Built and Designed by Manish Chapagain</span>
+        <span>Built and Designed by<bold> Manish Chapagain</bold></span>
     </div>
     <div class="tech">Python · Streamlit · Neo4j</div>
 </div>
