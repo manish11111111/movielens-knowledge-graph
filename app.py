@@ -1,6 +1,7 @@
 import os
 
 import certifi
+import html
 import pandas as pd
 import streamlit as st
 import streamlit.components.v1 as components
@@ -74,16 +75,28 @@ header[data-testid="stHeader"] {
     max-width: 1400px;
 }
 
-#MainMenu, footer { visibility: hidden; }
+#MainMenu, footer {
+    visibility: hidden;
+}
 
-::-webkit-scrollbar { width: 10px; height: 10px; }
-::-webkit-scrollbar-track { background: var(--bg-base); }
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-base);
+}
+
 ::-webkit-scrollbar-thumb {
     background: var(--bg-card-hover);
     border-radius: 99px;
     border: 2px solid var(--bg-base);
 }
-::-webkit-scrollbar-thumb:hover { background: var(--text-tertiary); }
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-tertiary);
+}
 
 .hero-wrap {
     position: relative;
@@ -98,8 +111,10 @@ header[data-testid="stHeader"] {
 .hero-wrap::before {
     content: '';
     position: absolute;
-    top: -50%; left: -10%;
-    width: 600px; height: 600px;
+    top: -50%;
+    left: -10%;
+    width: 600px;
+    height: 600px;
     background: radial-gradient(circle, var(--accent-glow) 0%, transparent 60%);
     filter: blur(60px);
     pointer-events: none;
@@ -108,8 +123,10 @@ header[data-testid="stHeader"] {
 .hero-wrap::after {
     content: '';
     position: absolute;
-    bottom: -60%; right: -5%;
-    width: 500px; height: 500px;
+    bottom: -60%;
+    right: -5%;
+    width: 500px;
+    height: 500px;
     background: radial-gradient(circle, rgba(167,139,250,0.18) 0%, transparent 60%);
     filter: blur(70px);
     pointer-events: none;
@@ -132,7 +149,9 @@ header[data-testid="stHeader"] {
 }
 
 .hero-eyebrow .dot {
-    width: 6px; height: 6px; border-radius: 50%;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
     background: var(--accent);
     box-shadow: 0 0 8px var(--accent);
 }
@@ -186,7 +205,8 @@ header[data-testid="stHeader"] {
 }
 
 .stat-icon {
-    width: 38px; height: 38px;
+    width: 38px;
+    height: 38px;
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -195,10 +215,25 @@ header[data-testid="stHeader"] {
     margin-bottom: 1rem;
 }
 
-.stat-icon.red { background: var(--accent-soft); border: 1px solid rgba(255,92,92,0.2); }
-.stat-icon.blue { background: var(--blue-soft); border: 1px solid rgba(96,165,250,0.2); }
-.stat-icon.gold { background: var(--gold-soft); border: 1px solid rgba(255,217,61,0.2); }
-.stat-icon.success { background: var(--success-soft); border: 1px solid rgba(52,211,153,0.2); }
+.stat-icon.red {
+    background: var(--accent-soft);
+    border: 1px solid rgba(255,92,92,0.2);
+}
+
+.stat-icon.blue {
+    background: var(--blue-soft);
+    border: 1px solid rgba(96,165,250,0.2);
+}
+
+.stat-icon.gold {
+    background: var(--gold-soft);
+    border: 1px solid rgba(255,217,61,0.2);
+}
+
+.stat-icon.success {
+    background: var(--success-soft);
+    border: 1px solid rgba(52,211,153,0.2);
+}
 
 .stat-label {
     color: var(--text-tertiary);
@@ -219,7 +254,10 @@ header[data-testid="stHeader"] {
     margin-bottom: 0.35rem;
 }
 
-.stat-sub { color: var(--text-tertiary); font-size: 0.78rem; }
+.stat-sub {
+    color: var(--text-tertiary);
+    font-size: 0.78rem;
+}
 
 .section-title {
     font-family: 'Space Grotesk', sans-serif;
@@ -359,7 +397,9 @@ div.stButton > button:not([kind="primary"]):hover {
     border-right: 1px solid var(--border-subtle) !important;
 }
 
-[data-testid="stSidebar"] > div:first-child { padding-top: 0 !important; }
+[data-testid="stSidebar"] > div:first-child {
+    padding-top: 0 !important;
+}
 
 .side-brand {
     display: flex;
@@ -369,7 +409,8 @@ div.stButton > button:not([kind="primary"]):hover {
 }
 
 .side-brand .logo {
-    width: 36px; height: 36px;
+    width: 36px;
+    height: 36px;
     border-radius: 10px;
     background: linear-gradient(135deg, #ff5c5c, #ffb347);
     display: flex;
@@ -437,7 +478,8 @@ div.stButton > button:not([kind="primary"]):hover {
 }
 
 .legend-dot {
-    width: 12px; height: 12px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
     flex-shrink: 0;
 }
@@ -474,6 +516,49 @@ div.stButton > button:not([kind="primary"]):hover {
     padding: 0.3rem 1rem 0 1rem;
 }
 
+.sidebar-credit {
+    position: relative;
+    margin-top: 1.1rem;
+    padding: 1rem 0.2rem 0.65rem;
+    border-top: 1px solid var(--border-subtle);
+    display: flex;
+    flex-direction: column;
+    gap: 0.42rem;
+}
+
+.sidebar-credit::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 0;
+    width: 42px;
+    height: 2px;
+    background: linear-gradient(90deg, #ff5c5c, #ffb347, #a78bfa);
+    border-radius: 99px;
+}
+
+.credit-label {
+    color: var(--text-tertiary);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.17em;
+    text-transform: uppercase;
+}
+
+.credit-name {
+    width: fit-content;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.02rem;
+    font-weight: 700;
+    letter-spacing: -0.035em;
+    line-height: 1.3;
+    background: linear-gradient(110deg, #ff5c5c 0%, #ffb347 52%, #a78bfa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
 .movie-panel {
     background: var(--bg-card);
     border: 1px solid var(--border-subtle);
@@ -486,7 +571,9 @@ div.stButton > button:not([kind="primary"]):hover {
 .movie-panel::before {
     content: '';
     position: absolute;
-    left: 0; top: 0; bottom: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
     width: 3px;
     background: linear-gradient(180deg, var(--gold), var(--accent));
     border-radius: 3px 0 0 3px;
@@ -575,6 +662,32 @@ div.stButton > button:not([kind="primary"]):hover {
     font-size: 0.72rem;
     letter-spacing: 0.02em;
 }
+
+@media (max-width: 768px) {
+    .hero-wrap {
+        padding: 1.8rem 1.3rem;
+    }
+
+    .hero-title {
+        font-size: 2.15rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stat-card {
+        padding: 1rem;
+    }
+
+    .stat-value {
+        font-size: 1.55rem;
+    }
+
+    .detail-grid {
+        grid-template-columns: 1fr;
+    }
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -603,13 +716,26 @@ with st.sidebar:
         '</div>',
         unsafe_allow_html=True,
     )
+
     st.divider()
 
-    st.markdown('<div class="side-section">Navigation</div>', unsafe_allow_html=True)
-    st.markdown('<div class="nav-item active">🔎 Movie Explorer</div>', unsafe_allow_html=True)
-    st.markdown('<div class="nav-item">🕸️ Knowledge Graph</div>', unsafe_allow_html=True)
+    st.markdown(
+        '<div class="side-section">Navigation</div>',
+        unsafe_allow_html=True,
+    )
+    st.markdown(
+        '<div class="nav-item active">🔎 Movie Explorer</div>',
+        unsafe_allow_html=True,
+    )
+    st.markdown(
+        '<div class="nav-item">🕸️ Knowledge Graph</div>',
+        unsafe_allow_html=True,
+    )
 
-    st.markdown('<div class="side-section">Graph Legend</div>', unsafe_allow_html=True)
+    st.markdown(
+        '<div class="side-section">Graph Legend</div>',
+        unsafe_allow_html=True,
+    )
     st.markdown(
         '<div class="legend-item"><span class="legend-dot movie"></span>Movie</div>'
         '<div class="legend-item"><span class="legend-dot genre"></span>Genre</div>'
@@ -618,8 +744,16 @@ with st.sidebar:
     )
 
     st.divider()
-    st.caption("Created by Manish Chapagain")
 
+    st.markdown(
+        """
+        <div class="sidebar-credit">
+            <span class="credit-label">Designed & Built By</span>
+            <span class="credit-name">Manish Chapagain</span>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
 for key, default in [
     ("movies", None),
@@ -655,8 +789,12 @@ def section_heading(title, subtitle=""):
         f'<div class="section-title"><span class="accent-line"></span>{title}</div>',
         unsafe_allow_html=True,
     )
+
     if subtitle:
-        st.markdown(f'<div class="section-desc">{subtitle}</div>', unsafe_allow_html=True)
+        st.markdown(
+            f'<div class="section-desc">{subtitle}</div>',
+            unsafe_allow_html=True,
+        )
 
 
 @st.cache_data(ttl=600, show_spinner=False)
@@ -671,6 +809,7 @@ def fetch_stats():
         MATCH (g:Genre)
         RETURN movies, users, ratings, count(g) AS genres
     """)
+
     return result[0] if result else None
 
 
@@ -681,6 +820,7 @@ def fetch_genres():
         RETURN g.name AS genre
         ORDER BY genre
     """)
+
     return [row["genre"] for row in result if row.get("genre")]
 
 
@@ -789,9 +929,17 @@ try:
 
         full_options = ["All genres"] + genre_options
         current_genre = st.session_state["selected_genre"]
-        default_idx = full_options.index(current_genre) if current_genre in full_options else 0
+        default_idx = (
+            full_options.index(current_genre)
+            if current_genre in full_options
+            else 0
+        )
 
-        selected_genre = st.selectbox("Genre", full_options, index=default_idx)
+        selected_genre = st.selectbox(
+            "Genre",
+            full_options,
+            index=default_idx,
+        )
 
         submitted = st.form_submit_button(
             "🔍 Search Movies",
@@ -804,7 +952,10 @@ try:
         st.session_state["selected_genre"] = selected_genre
         st.session_state["show_connections"] = False
         st.session_state["selected_movie_id"] = None
-        st.session_state["movies"] = search_movies(search_text, selected_genre)
+        st.session_state["movies"] = search_movies(
+            search_text,
+            selected_genre,
+        )
 
     movies = st.session_state["movies"]
 
@@ -822,10 +973,14 @@ try:
 
         df = pd.DataFrame(movies)
         df["genres"] = df["genres"].apply(
-            lambda items: ", ".join(i for i in (items or []) if i)
+            lambda items: ", ".join(
+                i for i in (items or []) if i
+            )
         )
         df["avg_rating"] = df["avg_rating"].apply(
-            lambda v: round(v, 2) if v is not None else "N/A"
+            lambda value: round(value, 2)
+            if value is not None
+            else "N/A"
         )
         df = df.rename(columns={
             "movie_id": "Movie ID",
@@ -835,7 +990,11 @@ try:
             "rating_count": "Ratings",
         })
 
-        st.dataframe(df, use_container_width=True, hide_index=True)
+        st.dataframe(
+            df,
+            use_container_width=True,
+            hide_index=True,
+        )
 
         section_heading(
             "🎥 Movie Details",
@@ -846,10 +1005,16 @@ try:
             f"{row['title']} (ID: {row['movie_id']})": row["movie_id"]
             for row in movies
         }
+
         option_labels = list(movie_options.keys())
         movie_ids = list(movie_options.values())
         current_id = st.session_state["selected_movie_id"]
-        default_index = movie_ids.index(current_id) if current_id in movie_ids else 0
+
+        default_index = (
+            movie_ids.index(current_id)
+            if current_id in movie_ids
+            else 0
+        )
 
         chosen_movie = st.selectbox(
             "Select a movie",
@@ -858,31 +1023,45 @@ try:
             key="movie_details",
         )
 
-        if st.button("🕸️ View Movie Connections", type="primary", use_container_width=True):
+        if st.button(
+            "🕸️ View Movie Connections",
+            type="primary",
+            use_container_width=True,
+        ):
             st.session_state["selected_movie_id"] = movie_options[chosen_movie]
             st.session_state["show_connections"] = True
 
         if st.session_state["show_connections"]:
             movie_id = st.session_state["selected_movie_id"]
+
             with st.spinner("Loading movie details and graph…"):
                 details = fetch_movie_details(movie_id)
                 graph_data = fetch_graph_data(movie_id)
 
             if details:
                 detail = details[0]
+
                 avg = (
                     f"{detail['avg_rating']:.2f} / 5"
                     if detail["avg_rating"] is not None
                     else "Not rated"
                 )
+
                 genre_names = detail["genres"] or []
+
                 genre_tags = "".join(
-                    f'<span class="genre-tag">{g}</span>' for g in genre_names
-                ) or '<span style="color:var(--text-tertiary);font-size:0.85rem;">No genres listed</span>'
+                    f'<span class="genre-tag">{html.escape(str(genre))}</span>'
+                    for genre in genre_names
+                ) or (
+                    '<span style="color:var(--text-tertiary);'
+                    'font-size:0.85rem;">No genres listed</span>'
+                )
+
+                safe_title = html.escape(str(detail["title"]))
 
                 st.markdown(f"""
                 <div class="movie-panel">
-                    <div class="movie-title-lg">{detail['title']}</div>
+                    <div class="movie-title-lg">{safe_title}</div>
                     <div class="detail-grid">
                         <div class="detail-cell">
                             <div class="detail-label">Average Rating</div>
@@ -922,6 +1101,7 @@ try:
                     )
 
                     movie_node = f"movie_{data['movie_id']}"
+
                     net.add_node(
                         movie_node,
                         label=data["title"],
@@ -929,16 +1109,24 @@ try:
                         color={
                             "background": "#F59E0B",
                             "border": "#FDE68A",
-                            "highlight": {"background": "#FBBF24", "border": "#FFFFFF"},
+                            "highlight": {
+                                "background": "#FBBF24",
+                                "border": "#FFFFFF",
+                            },
                         },
                         size=34,
                         shape="dot",
-                        font={"size": 20, "face": "Inter", "color": "#f5f5f7"},
+                        font={
+                            "size": 20,
+                            "face": "Inter",
+                            "color": "#f5f5f7",
+                        },
                     )
 
                     for genre in data["genres"]:
                         genre_name = genre["name"]
                         genre_node = f"genre_{genre_name}"
+
                         net.add_node(
                             genre_node,
                             label=genre_name,
@@ -946,16 +1134,31 @@ try:
                             color={
                                 "background": "#34D399",
                                 "border": "#6EE7B7",
-                                "highlight": {"background": "#6EE7B7", "border": "#FFFFFF"},
+                                "highlight": {
+                                    "background": "#6EE7B7",
+                                    "border": "#FFFFFF",
+                                },
                             },
                             size=23,
                             shape="diamond",
-                            font={"size": 15, "face": "Inter", "color": "#f5f5f7"},
+                            font={
+                                "size": 15,
+                                "face": "Inter",
+                                "color": "#f5f5f7",
+                            },
                         )
-                        net.add_edge(movie_node, genre_node, label="IN_GENRE", color="#34D399", arrows="to")
+
+                        net.add_edge(
+                            movie_node,
+                            genre_node,
+                            label="IN_GENRE",
+                            color="#34D399",
+                            arrows="to",
+                        )
 
                     for item in data["ratings"][:50]:
                         user_node = f"user_{item['user_id']}"
+
                         net.add_node(
                             user_node,
                             label=f"User {item['user_id']}",
@@ -963,19 +1166,30 @@ try:
                             color={
                                 "background": "#60A5FA",
                                 "border": "#93C5FD",
-                                "highlight": {"background": "#93C5FD", "border": "#FFFFFF"},
+                                "highlight": {
+                                    "background": "#93C5FD",
+                                    "border": "#FFFFFF",
+                                },
                             },
                             size=13,
                             shape="dot",
-                            font={"size": 11, "face": "Inter", "color": "#f5f5f7"},
+                            font={
+                                "size": 11,
+                                "face": "Inter",
+                                "color": "#f5f5f7",
+                            },
                         )
+
                         net.add_edge(
                             user_node,
                             movie_node,
                             label=str(item["rating"]),
                             color="#52627A",
                             arrows="to",
-                            font={"size": 10, "color": "#D1D5DB"},
+                            font={
+                                "size": 10,
+                                "color": "#D1D5DB",
+                            },
                         )
 
                     section_heading(
@@ -983,21 +1197,30 @@ try:
                         "Drag nodes to explore. Hover over a node or edge to inspect its information.",
                     )
 
-                    components.html(net.generate_html(), height=650, scrolling=True)
+                    components.html(
+                        net.generate_html(),
+                        height=650,
+                        scrolling=True,
+                    )
 
                     st.caption(
-                        f"Graph shows 1 movie, {len(data['genres'])} genre connection(s), "
-                        f"and up to {min(len(data['ratings']), 50)} user rating connection(s)."
+                        f"Graph shows 1 movie, {len(data['genres'])} "
+                        f"genre connection(s), and up to "
+                        f"{min(len(data['ratings']), 50)} "
+                        f"user rating connection(s)."
                     )
 
                     with st.expander("About this visualization"):
                         st.write(
-                            "Yellow nodes represent movies, green diamonds represent genres, "
-                            "and blue nodes represent users. Edges show genre membership and "
-                            "user ratings. The visualization limits user nodes to 50 for readability."
+                            "Yellow nodes represent movies, green diamonds "
+                            "represent genres, and blue nodes represent users. "
+                            "Edges show genre membership and user ratings. "
+                            "The visualization limits user nodes to 50 for readability."
                         )
+
                 else:
                     st.info("No graph connections found for this movie.")
+
             else:
                 st.warning("Movie details could not be found.")
 
@@ -1007,15 +1230,34 @@ except Exception as exc:
         "Check your .env credentials, internet connection, "
         "Neo4j Aura status, and graph property names."
     )
+
     with st.expander("Technical details"):
         st.code(str(exc))
 
-st.markdown("""
-<div class="app-footer">
-    <div class="brand">
-        <div class="stat-icon red" style="width:28px;height:28px;font-size:0.8rem;margin:0;">🎬</div>
-        <span>Built and Designed by<bold> Manish Chapagain</bold></span>
+
+st.markdown(
+    """
+    <div class="app-footer">
+        <div class="brand">
+            <strong>
+                <span style="
+                    background: linear-gradient(110deg, #ff5c5c 0%, #ffb347 52%, #a78bfa 100%);
+                    -webkit-background-clip: text;
+                    -webkit-text-fill-color: transparent;
+                    background-clip: text;
+                ">MovieLens</span>
+            </strong>
+            <span>· Knowledge Graph</span>
+        </div>
+        <div class="tech">
+            Designed &amp; built by
+            <strong style="
+                color: #ffb347;
+                font-family: 'Inter', sans-serif;
+                font-weight: 600;
+            ">Manish Chapagain</strong>
+        </div>
     </div>
-    <div class="tech">Python · Streamlit · Neo4j</div>
-</div>
-""", unsafe_allow_html=True)
+    """,
+    unsafe_allow_html=True,
+)
