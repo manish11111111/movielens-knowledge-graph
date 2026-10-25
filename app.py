@@ -618,7 +618,7 @@ with st.sidebar:
     )
 
     st.divider()
-    st.caption("Powered by Neo4j · Streamlit · Python")
+    st.caption("Created by Manish Chapagain")
 
 
 for key, default in [
@@ -1014,7 +1014,7 @@ st.markdown("""
 <div class="app-footer">
     <div class="brand">
         <div class="stat-icon red" style="width:28px;height:28px;font-size:0.8rem;margin:0;">🎬</div>
-        <span>MovieLens Knowledge Graph Explorer</span>
+        <span>Built and Designed by Manish Chapagain</span>
     </div>
     <div class="tech">Python · Streamlit · Neo4j</div>
 </div>
