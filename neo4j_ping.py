@@ -20,6 +20,14 @@ KEYS = [
 
 def load_config():
     cfg = {}
+    missing = [k for k in KEYS if not cfg.get(k)]
+    if missing:
+        print("Event:", os.environ.get("GITHUB_EVENT_NAME"))
+        print("Repo:", os.environ.get("GITHUB_REPOSITORY"))
+        print("Actor:", os.environ.get("GITHUB_ACTOR"))
+        print("Ref:", os.environ.get("GITHUB_REF"))
+        sys.exit(f"Missing config: {missing}")
+    
 
     # 1. .streamlit/secrets.toml (local)
     p = Path(".streamlit/secrets.toml")
