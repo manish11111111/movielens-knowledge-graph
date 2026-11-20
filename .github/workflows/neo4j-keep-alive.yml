@@ -1,0 +1,27 @@
+name: Keep Neo4j Aura Awake
+
+on:
+  schedule:
+    - cron: "0 */2 * * *"   # harek 12 ghanta ma
+  workflow_dispatch:
+
+jobs:
+    
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Install driver
+        run: pip install neo4j
+
+      - name: Ping Neo4j
+        env:
+          NEO4J_URI: ${{ secrets.NEO4J_URI }}
+          NEO4J_USERNAME: ${{ secrets.NEO4J_USERNAME }}
+          NEO4J_PASSWORD: ${{ secrets.NEO4J_PASSWORD }}
+        run: python neo4j_ping.py
