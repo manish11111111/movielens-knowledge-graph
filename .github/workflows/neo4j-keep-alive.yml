@@ -2,7 +2,7 @@ name: Keep Neo4j Aura Awake
 
 on:
   schedule:
-    - cron: "0 */2 * * *"
+    - cron: "0 */2 * * *"   # harek 2 ghanta ma
   workflow_dispatch:
 
 jobs:
