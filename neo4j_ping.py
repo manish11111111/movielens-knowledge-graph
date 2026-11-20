@@ -20,20 +20,15 @@ KEYS = [
 
 def load_config():
     cfg = {}
-    missing = [k for k in KEYS if not cfg.get(k)]
-    if missing:
-        print("Event:", os.environ.get("GITHUB_EVENT_NAME"))
-        print("Repo:", os.environ.get("GITHUB_REPOSITORY"))
-        print("Actor:", os.environ.get("GITHUB_ACTOR"))
-        print("Ref:", os.environ.get("GITHUB_REF"))
-        sys.exit(f"Missing config: {missing}")
-    
 
     # 1. .streamlit/secrets.toml (local)
     p = Path(".streamlit/secrets.toml")
     if p.exists():
-        data = tomllib.loads(p.read_text(encoding="utf-8"))
-        cfg.update({k: str(data[k]) for k in KEYS if k in data})
+        try:
+            data = tomllib.loads(p.read_text(encoding="utf-8"))
+            cfg.update({k: str(data[k]) for k in KEYS if k in data})
+        except tomllib.TOMLDecodeError as e:
+            print(f"Warning: secrets.toml is invalid ({e}). Skipping it.")
 
     # 2. .env (local)
     p = Path(".env")
@@ -51,8 +46,11 @@ def load_config():
         if os.environ.get(k):
             cfg[k] = os.environ[k]
 
+    # 4. Check, sabai padhepachi matra
     missing = [k for k in KEYS if not cfg.get(k)]
     if missing:
+        print("Event:", os.environ.get("GITHUB_EVENT_NAME"))
+        print("Repo:", os.environ.get("GITHUB_REPOSITORY"))
         sys.exit(f"Missing config: {missing}")
     return cfg
 
