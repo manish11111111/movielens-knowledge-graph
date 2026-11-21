@@ -944,7 +944,7 @@ try:
         submitted = st.form_submit_button(
             "🔍 Search Movies",
             type="primary",
-            use_container_width=True,
+            width="stretch",
         )
 
     if submitted:
@@ -992,7 +992,7 @@ try:
 
         st.dataframe(
             df,
-            use_container_width=True,
+            width="stretch",
             hide_index=True,
         )
 
@@ -1026,7 +1026,7 @@ try:
         if st.button(
             "🕸️ View Movie Connections",
             type="primary",
-            use_container_width=True,
+            width="stretch",
         ):
             st.session_state["selected_movie_id"] = movie_options[chosen_movie]
             st.session_state["show_connections"] = True
